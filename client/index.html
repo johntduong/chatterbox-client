@@ -8,7 +8,7 @@
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/underscore/backbone.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
 
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
@@ -32,17 +32,17 @@
       <div class="rooms">
         <input class="enterNewRoom" type="text" name="Enter New Room">
         <button class="addRoom">Add Room</button>
-        <select class="dropdown">
+        <select id="roomSelect">
           <option>lobby</option>
           <option>test</option>
         </select>  
 
       </div>
-        <form action="javascript:alert( 'success!' );">
-          <div>
-            <input id="enterMessage" type="text">
-            <input class="submit" type="submit">
-          </div>
+      <form>
+        <div>
+          <input id="message" type="text">
+          <input class="submit" type="submit">
+        </div>
       </form>
        <!-- <input id="enterMessage" type="text">
         <button class="submit">Send Message</button>-->
