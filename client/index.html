@@ -7,6 +7,9 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/underscore/backbone.js"></script>
+
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
@@ -23,9 +26,26 @@
     <script src="scripts/app.js"></script>
   </head>
   <body>
-    <div id="main">
+    <div id="main send">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
+      <div class="rooms">
+        <input class="enterNewRoom" type="text" name="Enter New Room">
+        <button class="addRoom">Add Room</button>
+        <select class="dropdown">
+          <option>lobby</option>
+          <option>test</option>
+        </select>  
+
+      </div>
+        <form action="javascript:alert( 'success!' );">
+          <div>
+            <input id="enterMessage" type="text">
+            <input class="submit" type="submit">
+          </div>
+      </form>
+       <!-- <input id="enterMessage" type="text">
+        <button class="submit">Send Message</button>-->
     </div>
     <div id="chats"></div>
   </body>
