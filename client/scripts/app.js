@@ -74,6 +74,7 @@ $(document).ready(function() {
     },
     handleSubmit: function(message) {
       app.send(message);
+      messages.push(message);
     }
   };
   // app.storage = app.fetch(function(val) {
@@ -83,15 +84,17 @@ $(document).ready(function() {
   app.fetch();
   $('.dropdown').on('change', function() {
     var room = $('.dropdown').val();
-    
+    app.clearMessages();
+    _.each(messages, function(message) {
+      if (message.roomname === room) {
+        app.renderMessage(message);
+      }
+    });
   });
   $('.addRoom').on('click', function() {
     var newRoom = $('.enterNewRoom').val();
     app.addRoom(newRoom);
     //app.renderRoom(newRoom);
-  });
-  $('body').on('change', '.dropdown', function() {
-    renderMessage();
   });
   $('body').on('click', '.username', function() { app.handleUsernameClick(); });
   $('form').submit(function( event ) {
