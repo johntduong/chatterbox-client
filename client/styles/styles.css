@@ -1,12 +1,31 @@
 body {
-    background: #eee;
-    text-align: center;
-    padding: 0 25px;
-    font-family: arial, sans-serif;
+    background: #fff;
+    font-family: "Helvetica Neue";
+    width: 50%;
+    margin: 40px auto;
 }
 
-#main, #chats {
-    width: 500px;
+#chats {
+    margin: 30px 10px;
+    /*line-height: 2px;*/
+    text-align: left;
+}
+
+hr {
+    border-style: inset;
+    border-width: 1px;
+    width: 50%;
+    margin-left: 0px;
+}
+
+.username {
+    color: #55ACEE;
+}
+
+
+
+
+/*#main, #chats {
     margin: auto;
     text-align: left;
     background: white;
@@ -88,3 +107,4 @@ form input[type=text] {
     background-color: #0090da;
 }
 
+*/

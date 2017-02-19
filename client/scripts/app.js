@@ -1,5 +1,5 @@
 // YOUR CODE HERE:
-var messages = [];
+//var messages = [];
 var app;
 var rooms = new Set();
 const ESC_MAP = {
@@ -27,6 +27,7 @@ $(document).ready(function() {
     server: 'http://parse.sfm6.hackreactor.com/chatterbox/classes/messages',
     friends: new Set(),
     storage: {},
+    selectedRoom: $('#roomSelect').val() || 'lobby',
     username: escapeString(ESC_MAP, window.location.search.slice(window.location.search.indexOf('=') + 1)),
     init: function() {
     },
@@ -65,14 +66,17 @@ $(document).ready(function() {
           _.each(response.results, function(message) {
             //console.log(message.text);
             if (message.text) {
-              messages.push(message);
-              rooms.add(message.roomname);
-              app.renderMessage(message);
+              if (!rooms.has(message.roomname)) {
+                rooms.add(message.roomname);
+                app.renderRoom(message.roomname);
+              }
+              if (app.selectedRoom === message.roomname) {
+                app.renderMessage(message);
+              }
             }
           });
-          $('#roomSelect').empty();
-          _.each(Array.from(rooms), app.renderRoom
-            );
+          //$('#roomSelect').empty();
+
           console.log(rooms);
         },
         error: function (data) {
@@ -88,9 +92,9 @@ $(document).ready(function() {
       var person = message.username;
       if (app.friends.has(person)) {
         console.log('enter');
-        $('#chats').append(`<div style="font-weight:bold"> <button class="username "> ${person} </button>${escapeString(ESC_MAP, message.text)}</div>`);
+        $('#chats').append(`<div style="font-weight:bold"> <a href="#/" class="username"> ${person} </a>${escapeString(ESC_MAP, message.text)}<hr></div>`);
       } else {
-        $('#chats').append(`<div> <button class="username"> ${person} </button> ${escapeString(ESC_MAP, message.text)} </div>`);
+        $('#chats').append(`<div> <a href="#/" class="username"> ${person} </a> ${escapeString(ESC_MAP, message.text)} <hr></div>`);
       }
       //$('#main').prepend(`<button class="username"> ${message.username} </button>`);
     },
@@ -111,7 +115,6 @@ $(document).ready(function() {
     },
     handleSubmit: function(message) {
       app.send(message);
-      messages.push(message);
     }
   };
   app.fetch();
@@ -119,13 +122,14 @@ $(document).ready(function() {
     app.fetch();
   }, 5000);
   $('#roomSelect').on('change', function() {
-    var room = $('#roomSelect').val();
-    app.clearMessages();
-    _.each(messages, function(message) {
-      if (message.roomname === room) {
-        app.renderMessage(message);
-      }
-    });
+    app.selectedRoom = $('#roomSelect').val();
+    //app.clearMessages();
+    app.fetch();
+    // _.each(messages, function(message) {
+    //   if (message.roomname === app.selectedRoom) {
+    //     app.renderMessage(message);
+    //   }
+    // });
   });
   $('.addRoom').on('click', function() {
     var newRoom = $('.enterNewRoom').val();
